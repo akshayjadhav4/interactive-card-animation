@@ -1,11 +1,15 @@
 import { SafeAreaView, StyleSheet } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Card from "./components/Card";
 
 export default function App() {
   return (
-    <SafeAreaView style={styles.container}>
-      <Card />
-    </SafeAreaView>
+    // for Android
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <SafeAreaView style={styles.container}>
+        <Card />
+      </SafeAreaView>
+    </GestureHandlerRootView>
   );
 }
 
