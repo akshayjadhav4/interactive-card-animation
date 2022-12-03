@@ -36,6 +36,10 @@ const CARD_HEIGHT = 450;
  */
 const MIN_ROTATE = -10;
 const MAX_ROTATE = 10;
+const MIN_TRANSLATE_X = -100;
+const MAX_TRANSLATE_X = 100;
+const MIN_TRANSLATE_Y = -100;
+const MAX_TRANSLATE_Y = 100;
 const Card = () => {
   const rotateXValue = useSharedValue(0);
   const rotateYValue = useSharedValue(0);
@@ -54,11 +58,29 @@ const Card = () => {
           )
         );
 
+        translateXValue.value = withTiming(
+          interpolate(
+            event.translationX,
+            [MIN_TRANSLATE_X, MAX_TRANSLATE_X], //for range from min to max move horizontal -50 to 50
+            [-50, 50],
+            Extrapolate.CLAMP
+          )
+        );
+
         rotateYValue.value = withTiming(
           interpolate(
             event.x,
             [0, CARD_WIDTH],
             [MIN_ROTATE, MAX_ROTATE],
+            Extrapolate.CLAMP
+          )
+        );
+
+        translateYValue.value = withTiming(
+          interpolate(
+            event.translationY,
+            [MIN_TRANSLATE_Y, MAX_TRANSLATE_Y],
+            [-30, 30],
             Extrapolate.CLAMP
           )
         );
@@ -71,18 +93,31 @@ const Card = () => {
           Extrapolate.CLAMP
         );
 
+        translateXValue.value = interpolate(
+          event.translationX,
+          [MIN_TRANSLATE_X, MAX_TRANSLATE_X],
+          [-50, 50],
+          Extrapolate.CLAMP
+        );
+
         rotateYValue.value = interpolate(
           event.x,
           [0, CARD_WIDTH],
           [MIN_ROTATE, MAX_ROTATE],
           Extrapolate.CLAMP
         );
+        translateYValue.value = interpolate(
+          event.translationY,
+          [MIN_TRANSLATE_Y, MAX_TRANSLATE_Y],
+          [-30, 30],
+          Extrapolate.CLAMP
+        );
       },
       onFinish: () => {
-        rotateXValue.value = withTiming(0);
-        rotateYValue.value = withTiming(0);
-        translateXValue.value = withTiming(0);
-        translateYValue.value = withTiming(0);
+        rotateXValue.value = withSpring(0);
+        rotateYValue.value = withSpring(0);
+        translateXValue.value = withSpring(0);
+        translateYValue.value = withSpring(0);
       },
     });
 
