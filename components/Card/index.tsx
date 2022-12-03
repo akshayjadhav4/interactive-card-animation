@@ -12,10 +12,15 @@ import { MaterialIcons } from "@expo/vector-icons";
 
 const { width } = Dimensions.get("window");
 const CARD_WIDTH = width * 0.8;
-
+const CARD_HEIGHT = 450;
 const Card = () => {
   return (
-    <View style={styles.cardContainer}>
+    <View
+      style={styles.cardContainer}
+      // onLayout={({ nativeEvent }) => {
+      //   console.log(nativeEvent);
+      // }}
+    >
       <Image
         source={require("../../assets/pizza-in-plate.png")}
         style={styles.cardImage}
@@ -57,6 +62,7 @@ const styles = StyleSheet.create({
   cardContainer: {
     backgroundColor: "#FCFDF2",
     width: CARD_WIDTH,
+    height: CARD_HEIGHT,
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 25,
@@ -73,8 +79,8 @@ const styles = StyleSheet.create({
     elevation: 10,
   },
   cardImage: {
-    width: CARD_WIDTH,
-    height: CARD_WIDTH,
+    width: 300,
+    height: 250,
   },
   cartTitleText: {
     fontSize: 33,
